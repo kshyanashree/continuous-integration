@@ -2476,16 +2476,11 @@ def print_project_pipeline(
     #      - uses a custom built Bazel binary (in Bazel Downstream Projects pipeline)
     #      - testing incompatible flags
     #      - running `bazelisk --migrate` in a non-downstream pipeline
-    #if (
-    #    current_branch_is_main_branch()
-    #    and pipeline_slug in all_downstream_pipeline_slugs
-    #    and not (is_pull_request() or use_but or incompatible_flags or use_bazelisk_migrate())
-    #):
-        # We need to call "Try Update Last Green Commit" even if there are failures,
-        # since we don't want a failing Buildifier step to block the update of
-        # the last green commit for this project.
-        # try_update_last_green_commit() ensures that we don't update the commit
-        # if any build or test steps fail.
+    # We need to call "Try Update Last Green Commit" even if there are failures,
+    # since we don't want a failing Buildifier step to block the update of
+    # the last green commit for this project.
+    # try_update_last_green_commit() ensures that we don't update the commit
+    # if any build or test steps fail.
     pipeline_steps.append(
         create_step(
             label="current_branch_is_main_branch:" + current_branch_is_main_branch() + "pipeline_slug:" + (pipeline_slug in all_downstream_pipeline_slugs) + "3rd condition" + (is_pull_request() or use_but or incompatible_flags or use_bazelisk_migrate()),
