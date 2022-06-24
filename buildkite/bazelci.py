@@ -2476,28 +2476,37 @@ def print_project_pipeline(
     #      - uses a custom built Bazel binary (in Bazel Downstream Projects pipeline)
     #      - testing incompatible flags
     #      - running `bazelisk --migrate` in a non-downstream pipeline
-    if (
+    #if (
         current_branch_is_main_branch()
         and pipeline_slug in all_downstream_pipeline_slugs
         and not (is_pull_request() or use_but or incompatible_flags or use_bazelisk_migrate())
-    ):
+    #):
         # We need to call "Try Update Last Green Commit" even if there are failures,
         # since we don't want a failing Buildifier step to block the update of
         # the last green commit for this project.
         # try_update_last_green_commit() ensures that we don't update the commit
         # if any build or test steps fail.
-        pipeline_steps.append({"wait": None, "continue_on_failure": True})
-        pipeline_steps.append(
-            create_step(
-                label="Try Update Last Green Commit",
-                commands=[
-                    fetch_bazelcipy_command(),
-                    PLATFORMS[DEFAULT_PLATFORM]["python"]
-                    + " bazelci.py try_update_last_green_commit",
-                ],
-                platform=DEFAULT_PLATFORM,
-            )
+    pipeline_steps.append(
+        create_step(
+            label="current_branch_is_main_branch:" + current_branch_is_main_branch() + "pipeline_slug:" + (pipeline_slug in all_downstream_pipeline_slugs) + "3rd condition" + (is_pull_request() or use_but or incompatible_flags or use_bazelisk_migrate()),
+            commands=[
+                'buildkite-agent annotate --style=info "The following tasks were skipped since they require specific Bazel versions:\n" '
+            ],
+            platform=DEFAULT_PLATFORM,
         )
+    )
+    pipeline_steps.append({"wait": None, "continue_on_failure": True})
+    pipeline_steps.append(
+        create_step(
+            label="Try Update Last Green Commit",
+            commands=[
+                fetch_bazelcipy_command(),
+                PLATFORMS[DEFAULT_PLATFORM]["python"]
+                + " bazelci.py try_update_last_green_commit",
+            ],
+            platform=DEFAULT_PLATFORM,
+        )
+    )
 
     if "validate_config" in configs:
         pipeline_steps += create_config_validation_steps()
