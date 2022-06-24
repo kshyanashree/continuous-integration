@@ -3152,7 +3152,7 @@ def bazelci_last_green_commit_url(git_repository, pipeline_slug, branch=None):
     branch_part = ""
     if branch:
         branch_part = "/" + branch
-    elif os.getenv("MULTIPLE_BRANCHES"):
+    elif bool(os.getenv("MULTIPLE_BRANCHES")):
         branch_part = "/" + os.getenv("BUILDKITE_BRANCH")
         
     return "gs://{}/last_green_commit/{}/{}{}".format(
