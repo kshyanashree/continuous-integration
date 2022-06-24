@@ -2477,9 +2477,9 @@ def print_project_pipeline(
     #      - testing incompatible flags
     #      - running `bazelisk --migrate` in a non-downstream pipeline
     #if (
-        current_branch_is_main_branch()
-        and pipeline_slug in all_downstream_pipeline_slugs
-        and not (is_pull_request() or use_but or incompatible_flags or use_bazelisk_migrate())
+    #    current_branch_is_main_branch()
+    #    and pipeline_slug in all_downstream_pipeline_slugs
+    #    and not (is_pull_request() or use_but or incompatible_flags or use_bazelisk_migrate())
     #):
         # We need to call "Try Update Last Green Commit" even if there are failures,
         # since we don't want a failing Buildifier step to block the update of
