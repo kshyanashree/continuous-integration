@@ -2483,7 +2483,7 @@ def print_project_pipeline(
     # if any build or test steps fail.
     pipeline_steps.append(
         create_step(
-            label="current_branch_is_main_branch:" + current_branch_is_main_branch() + "pipeline_slug:" + (pipeline_slug in all_downstream_pipeline_slugs) + "3rd condition" + (is_pull_request() or use_but or incompatible_flags or use_bazelisk_migrate()),
+            label="current_branch_is_main_branch:" + str(current_branch_is_main_branch()) + "pipeline_slug:" + str(pipeline_slug in all_downstream_pipeline_slugs) + "3rd condition" + str(is_pull_request() or use_but or incompatible_flags or use_bazelisk_migrate()),
             commands=[
                 'buildkite-agent annotate --style=info "The following tasks were skipped since they require specific Bazel versions:\n" '
             ],
