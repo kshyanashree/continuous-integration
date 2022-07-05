@@ -19,7 +19,7 @@ import threading
 
 import bazelci
 
-BUILDKITE_ORG = "bazel"
+BUILDKITE_ORG = "bazel-testing"
 DOWNSTREAM_PIPELINE = "bazel-at-head-plus-downstream"
 CULPRIT_FINDER_PIPELINE = "culprit-finder"
 
