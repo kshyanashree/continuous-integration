@@ -1599,7 +1599,7 @@ def download_bazelci_agent(dest_dir, platform, version):
     elif platform == "macos":
         postfix = "x86_64-apple-darwin"
     else:
-        postfix = "x86_64-unknown-linux-gnu"
+        postfix = "x86_64-unknown-linux-musl"
 
     name = "bazelci-agent-{}-{}".format(version, postfix)
     url = (
