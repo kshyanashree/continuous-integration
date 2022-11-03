@@ -172,7 +172,8 @@ After a few days of iteration:
 ## Release requirements
 
 1.  The release announcement must be ready (the pull request has been reviewed).
-1.  Verify that the [conditions outlined in our policy](https://bazel.build/support.html#policy) **all apply**. As of
+2.  There should be a new Bazel Release Announcement document for every major release.
+3.  Verify that the [conditions outlined in our policy](https://bazel.build/support.html#policy) **all apply**. As of
     May 2019 those were the following, but _double check_ that they have not changed since then.
     1.  at least **1 week passed since you pushed RC1**, and
     1.  at least **2 business days passed since you pushed the last RC**, and
